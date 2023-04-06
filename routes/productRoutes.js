@@ -61,4 +61,22 @@ router.delete("/products/:productid", async (req, res) => {
   res.redirect("/products");
 });
 
+router.get("/cart", (req, res) => {
+  res.render("./products/cart");
+});
+
+router.post("/products/:productid", async (req, res) => {
+  const { productid } = req.params;
+
+  // const { productname } = req.body;
+
+  // Find the currentuser in which you want to add product
+  const prodcut = await User.findOne(productid);
+
+  await user.prodcuts.push(productid);
+
+  await user.save(); // To save the content of array
+  res.redirect(`/products/`);
+});
+
 module.exports = router;
